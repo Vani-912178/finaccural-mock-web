@@ -1,0 +1,10 @@
+.site-footer { margin-top: auto; border-top: 1px solid var(--color-border); background: #fff; }
+.site-footer__main { display: grid; grid-template-columns: 1fr 1.5fr auto; align-items: center; gap: 24px; padding-top: 26px; padding-bottom: 26px; }
+.site-footer__brand { display: inline-flex; align-items: center; gap: 9px; width: fit-content; color: var(--color-text); font-weight: 800; }
+.site-footer__badge { display: grid; width: 30px; height: 30px; place-items: center; border-radius: 8px; background: var(--color-primary-g); color: #fff; font-size: .7rem; letter-spacing: .05em; }
+.site-footer__message, .site-footer__bottom { color: var(--color-text-3); font-size: .82rem; }
+.site-footer__links { display: flex; gap: 22px; }
+.site-footer__links a { color: var(--color-text-2); font-size: .87rem; font-weight: 600; }
+.site-footer__links a:hover { color: var(--color-primary); }
+.site-footer__bottom { display: flex; justify-content: space-between; gap: 16px; border-top: 1px solid var(--color-border); padding-top: 14px; padding-bottom: 14px; }
+@media (max-width: 720px) { .site-footer__main { grid-template-columns: 1fr; gap: 14px; text-align: center; justify-items: center; } .site-footer__bottom { flex-direction: column; align-items: center; text-align: center; gap: 4px; } }
