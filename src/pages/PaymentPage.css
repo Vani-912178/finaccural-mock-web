@@ -118,6 +118,40 @@
 
 .text-success { color: var(--color-success); font-weight: 600; }
 
+/* Focused, professional checkout refinements */
+.payment-layout { max-width: 1120px; width: calc(100% - 48px); min-height: auto; margin: 48px auto; border: 1px solid var(--color-border); border-radius: 16px; overflow: hidden; background: #fff; box-shadow: var(--shadow-md); }
+.order-summary { background: #f8fafc; padding: 42px 34px; }
+.order-summary__renewal { margin-top: 8px; color: var(--color-text-3); font-size: .78rem; line-height: 1.5; }
+.payment-form-area { padding: 44px 52px; max-width: 610px; }
+.payment-form-area__eyebrow { margin-bottom: 8px; color: var(--color-primary); font-size: .75rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.payment-form-area__heading { font-size: 1.9rem; }
+.payment-methods { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 25px 0; }
+.payment-method { display: flex; min-height: 72px; align-items: center; gap: 9px; padding: 10px; border: 1px solid var(--color-border); border-radius: 8px; background: #fff; color: var(--color-text); text-align: left; }
+.payment-method:hover { border-color: var(--color-primary); }
+.payment-method--active { border: 2px solid var(--color-primary); padding: 9px; background: #f8fbff; }
+.payment-method__icon { display: grid; width: 26px; height: 26px; place-items: center; border-radius: 6px; background: #eaf2ff; color: var(--color-primary); font-size: 15px; }
+.payment-method strong, .payment-method small { display: block; }
+.payment-method strong { font-size: .8rem; }
+.payment-method small { margin-top: 2px; color: var(--color-text-3); font-size: .65rem; line-height: 1.25; }
+.card-preview { background: #fff; border: 1px solid var(--color-border-2); border-radius: 10px; box-shadow: none; }
+.card-preview::before { display: none; }
+.card-preview--visa, .card-preview--mc, .card-preview--amex { background: #fff; }
+.card-preview--upi, .card-preview--bank { display: none; }
+.card-preview__type, .card-preview__number, .card-preview__field-value { color: var(--color-text); }
+.card-preview__field-label { color: var(--color-text-3); }
+.card-preview__chip { background: #d8b55a; }
+.form-input { border-color: var(--color-border-2); border-radius: 7px; background: #fff; }
+.pay-btn { min-height: 50px; font-size: .95rem; }
+.payment-form--upi .card-payment-field,
+.payment-form--bank .card-payment-field { display: none; }
+.payment-detail-panel { display: grid; grid-template-columns: auto 1fr; gap: 12px; padding: 18px; border: 1px solid var(--color-border); border-radius: 10px; background: #f8fafc; }
+.payment-detail-panel .form-group, .payment-detail-panel .form-row { grid-column: 1 / -1; margin-top: 4px; }
+.payment-detail-panel__icon { display: grid; width: 34px; height: 34px; place-items: center; border-radius: 8px; background: #eaf2ff; color: var(--color-primary); }
+.payment-detail-panel h2 { color: var(--color-text); font-size: .95rem; margin-bottom: 2px; }
+.payment-detail-panel p { color: var(--color-text-3); font-size: .78rem; line-height: 1.45; }
+@media (max-width: 1024px) { .payment-layout { width: 100%; margin: 0; border: 0; border-radius: 0; box-shadow: none; } }
+@media (max-width: 560px) { .payment-methods { grid-template-columns: 1fr; } .payment-form-area { padding: 32px 20px; } }
+
 .order-summary__security {
   margin-top: auto;
   padding-top: 32px;
@@ -372,3 +406,16 @@
   .form-row { grid-template-columns: 1fr; }
   .card-preview__number { font-size: 1.05rem; }
 }
+
+/* Final checkout layout: intentionally compact and form-led. */
+.payment-layout { max-width: 1060px; grid-template-columns: 350px 1fr; margin: 34px auto; }
+.order-summary { padding: 34px 30px; }
+.payment-form-area { max-width: 560px; padding: 36px 46px; animation: none; }
+.payment-form-area__heading { font-size: 1.7rem; }
+.payment-form-area__subtext { margin-bottom: 22px; }
+.payment-methods { margin: 18px 0 22px; }
+.payment-method { min-height: 62px; }
+.card-preview { display: none; }
+.payment-form { gap: 16px; }
+.pay-btn { margin-top: 4px; }
+@media (max-width: 1024px) { .payment-layout { grid-template-columns: 1fr; width: 100%; margin: 0; } .payment-form-area { max-width: 620px; margin: 0 auto; } }

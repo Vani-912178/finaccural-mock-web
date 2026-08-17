@@ -12,7 +12,7 @@
 
 .login-shell {
   flex: 1;
-  padding: 56px 20px;
+  padding: 28px 20px;
   background: var(--color-bg);
 }
 
@@ -45,7 +45,7 @@
   background: var(--color-bg-card);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
-  padding: 48px 44px;
+  padding: 32px 36px;
   max-width: 440px;
   width: 100%;
   box-shadow: var(--shadow-lg);
@@ -69,7 +69,7 @@
 
 /* Logo */
 .login-card__logo-wrap {
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 }
 
 .login-card__logo {
@@ -98,7 +98,7 @@
 .login-card__subtext {
   font-size: 0.9rem;
   color: var(--color-text-2);
-  margin-bottom: 32px;
+  margin-bottom: 22px;
 }
 
 /* Form */
@@ -106,7 +106,7 @@
   text-align: left;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 13px;
 }
 
 .form-label-row {
@@ -195,7 +195,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  margin: 24px 0 16px;
+  margin: 18px 0 12px;
   color: var(--color-text-3);
   font-size: 0.8rem;
 }
@@ -227,7 +227,7 @@
 
 .login-link:hover { color: var(--color-accent); }
 .login-plans-link { margin: 0 auto; }
-.login-security-note { margin-top: 21px; color: var(--color-text-3); font-size: .75rem; }
+.login-security-note { margin-top: 15px; color: var(--color-text-3); font-size: .75rem; }
 .login-security-note span { color: var(--color-success); font-size: 1rem; vertical-align: -1px; }
 .login-error { padding: 10px 12px; border: 1px solid rgba(239,68,68,.25); border-radius: var(--radius-sm); background: rgba(239,68,68,.08); color: #dc2626; font-size: .82rem; }
 
@@ -248,3 +248,15 @@
   }
   .login-card__heading { font-size: 1.5rem; }
 }
+
+/* Compact professional login presentation */
+.login-card { max-width: 420px; padding: 30px 34px; border-radius: 14px; }
+.login-card::before { display: none; }
+.login-card__logo { width: 44px; height: 44px; border-radius: 10px; background: var(--color-primary); box-shadow: none; }
+.login-eyebrow, .login-security-note { display: none; }
+.login-card__heading { font-size: 1.65rem; }
+.login-card__subtext { font-size: .88rem; margin-bottom: 22px; }
+.login-input { height: 44px; border-radius: 7px; background: #fff; }
+.login-divider { margin: 18px 0 8px; }
+.login-divider::before, .login-divider::after { display: none; }
+@media (max-width: 480px) { .login-card { padding: 28px 22px; } }

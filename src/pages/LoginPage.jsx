@@ -8,27 +8,11 @@ function LoginPage() {
   const navigate = useNavigate()
   const [finAccrualId, setFinAccrualId] = useState('')
   const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
   const [showPassword, setShowPassword] = useState(false)
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    const stored = localStorage.getItem('fa_credentials')
-
-    if (!stored) {
-      setError('No account was found. Please choose a plan to get started.')
-      return
-    }
-
-    const credentials = JSON.parse(stored)
-    const idMatches = [credentials.id, credentials.userId].includes(finAccrualId.trim())
-    if (!idMatches || credentials.password !== password) {
-      setError('The FinAccrual ID or password is incorrect.')
-      return
-    }
-
-    localStorage.setItem('fa_logged_in', 'true')
-    navigate('/credentials')
+    navigate('/plans')
   }
 
   return (
@@ -59,12 +43,9 @@ function LoginPage() {
               </div>
             </div>
 
-            {error && <p className="login-error" role="alert">{error}</p>}
             <button className="btn btn-primary btn-full login-btn" type="submit">Sign in securely <span aria-hidden="true">→</span></button>
           </form>
 
-          <div className="login-divider">New to FinAccrual?</div>
-          <button className="login-link login-plans-link" type="button" onClick={() => navigate('/plans')}>Explore plans and pricing</button>
           <p className="login-security-note"><span aria-hidden="true">⌁</span> Your data is protected with enterprise-grade security.</p>
         </section>
       </main>

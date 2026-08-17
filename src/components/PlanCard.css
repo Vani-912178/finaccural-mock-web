@@ -5,7 +5,8 @@
   background: var(--color-bg-card);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
-  padding: 36px 32px;
+  height: 100%;
+  padding: 28px 26px;
   display: flex;
   flex-direction: column;
   gap: 0;
@@ -69,7 +70,7 @@
 
 /* Header */
 .plan-card__header {
-  margin-bottom: 28px;
+  margin-bottom: 20px;
 }
 
 .plan-card__icon {
@@ -104,8 +105,8 @@
   display: flex;
   align-items: baseline;
   gap: 4px;
-  margin-bottom: 28px;
-  padding-bottom: 28px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
   border-bottom: 1px solid var(--color-border);
 }
 
@@ -135,8 +136,8 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-bottom: 32px;
+  gap: 9px;
+  margin-bottom: 24px;
 }
 
 .plan-card__feature {

@@ -44,23 +44,11 @@ const SIDEBAR_ITEMS = [
   },
 ]
 
-const SHEET_DATA = [
-  { account: 'Revenue - Product Sales', code: '4000-001', jan: '124,500', feb: '138,200', mar: '151,800', q1: '414,500', type: 'Revenue', status: 'Active' },
-  { account: 'Revenue - Services', code: '4000-002', jan: '48,200', feb: '52,100', mar: '61,400', q1: '161,700', type: 'Revenue', status: 'Active' },
-  { account: 'Cost of Goods Sold', code: '5000-001', jan: '(62,250)', feb: '(69,100)', mar: '(75,900)', q1: '(207,250)', type: 'Expense', status: 'Active' },
-  { account: 'Gross Profit', code: 'CALC', jan: '110,450', feb: '121,200', mar: '137,300', q1: '368,950', type: 'Calc', status: '' },
-  { account: 'Salaries & Benefits', code: '6000-001', jan: '(38,000)', feb: '(38,000)', mar: '(40,500)', q1: '(116,500)', type: 'Expense', status: 'Active' },
-  { account: 'Rent & Utilities', code: '6100-001', jan: '(8,400)', feb: '(8,400)', mar: '(8,400)', q1: '(25,200)', type: 'Expense', status: 'Active' },
-  { account: 'Marketing & Advertising', code: '6200-001', jan: '(12,800)', feb: '(15,200)', mar: '(18,600)', q1: '(46,600)', type: 'Expense', status: 'Active' },
-  { account: 'Depreciation', code: '6300-001', jan: '(4,200)', feb: '(4,200)', mar: '(4,200)', q1: '(12,600)', type: 'Expense', status: 'Active' },
-  { account: 'Other Operating Expenses', code: '6400-001', jan: '(3,100)', feb: '(2,800)', mar: '(3,600)', q1: '(9,500)', type: 'Expense', status: 'Active' },
-  { account: 'EBITDA', code: 'CALC', jan: '43,950', feb: '52,600', mar: '62,000', q1: '158,550', type: 'Calc', status: '' },
-  { account: 'Interest Income', code: '7000-001', jan: '1,200', feb: '1,200', mar: '1,200', q1: '3,600', type: 'Income', status: 'Active' },
-  { account: 'Tax Expense', code: '8000-001', jan: '(11,288)', feb: '(13,450)', mar: '(15,800)', q1: '(40,538)', type: 'Expense', status: 'Active' },
-  { account: 'Net Income', code: 'CALC', jan: '33,862', feb: '40,350', mar: '47,400', q1: '121,612', type: 'Calc', status: '' },
-]
-
-const SHEETS = ['P&L Statement', 'Balance Sheet', 'Cash Flow', 'Trial Balance', 'Accruals']
+const COLUMN_COUNT = 12
+const ROW_COUNT = 40
+const COLUMNS = Array.from({ length: COLUMN_COUNT }, (_, index) => String.fromCharCode(65 + index))
+const ROWS = Array.from({ length: ROW_COUNT }, (_, index) => index + 1)
+const SHEETS = ['Sheet1', 'Sheet2', 'Sheet3']
 
 function ExcelPage() {
   const navigate = useNavigate()
@@ -91,7 +79,7 @@ function ExcelPage() {
   }
 
   const cellAddress = selectedCell
-    ? `${String.fromCharCode(65 + selectedCell.col)}${selectedCell.row + 2}`
+    ? `${String.fromCharCode(65 + selectedCell.col)}${selectedCell.row + 1}`
     : 'A1'
 
   if (!creds) return null
@@ -100,13 +88,18 @@ function ExcelPage() {
     <div className="excel-app">
       {/* ── TOP RIBBON ─────────────────────────────────────── */}
       <header className="excel-ribbon" role="banner">
+        <div className="excel-windowbar">
+          <div className="excel-windowbar__left"><span className="excel-windowbar__app">X</span><span>AutoSave</span><span className="excel-windowbar__toggle" aria-hidden="true" /><span className="excel-windowbar__save">▣</span><span className="excel-windowbar__title">Book1 - Excel</span></div>
+          <div className="excel-windowbar__right"><span className="excel-windowbar__avatar">MG</span><button className="excel-windowbar__buy">◇ Buy Microsoft 365</button><span>—</span><span>□</span><span>×</span></div>
+        </div>
+        <nav className="excel-menu" aria-label="Excel menu"><button>File</button><button className="excel-menu__active">Home</button><button>Insert</button><button>Draw</button><button>Page Layout</button><button>Formulas</button><button>Data</button><button>Review</button><button>View</button><button>Help</button><span className="excel-menu__search">⌕&nbsp; Tell me what you want to do</span><button className="excel-menu__share">Share</button></nav>
         {/* Brand */}
         <div className="excel-ribbon__brand">
           <div className="excel-ribbon__logo" aria-label="FinAccrual">FN</div>
           <div>
             <span className="excel-ribbon__appname">FinAccrual</span>
             <span className="excel-ribbon__separator">·</span>
-            <span className="excel-ribbon__filename">PL_Statement_Q1_2026.xlsx</span>
+            <span className="excel-ribbon__filename">Book1.xlsx</span>
           </div>
         </div>
 
@@ -175,8 +168,8 @@ function ExcelPage() {
         <div className="formula-separator" aria-hidden="true">fx</div>
         <div className="formula-input" aria-label="Cell value">
           {selectedCell
-            ? Object.values(SHEET_DATA[selectedCell.row] || {})[selectedCell.col] || ''
-            : '=SUM(C3:E3)'}
+            ? ''
+            : ''}
         </div>
       </div>
 
@@ -277,58 +270,37 @@ function ExcelPage() {
             id={`sheet-panel-${activeSheet}`}
             aria-labelledby={`sheet-tab-${activeSheet}`}
           >
-            <table className="excel-grid" aria-label="Financial data spreadsheet">
+            <table className="excel-grid" aria-label="Blank spreadsheet">
               <thead>
                 <tr>
                   <th className="excel-row-header" scope="col" aria-label="Row numbers" />
-                  {['Account Name', 'Code', 'Jan 2026', 'Feb 2026', 'Mar 2026', 'Q1 Total', 'Type', 'Status'].map((h, i) => (
-                    <th key={h} scope="col" className="excel-col-header" aria-label={h}>
-                      {String.fromCharCode(65 + i)}
+                  {COLUMNS.map((column) => (
+                    <th key={column} scope="col" className="excel-col-header" aria-label={`Column ${column}`}>
+                      {column}
                     </th>
-                  ))}
-                </tr>
-                <tr className="excel-col-labels">
-                  <th className="excel-row-header" scope="col" />
-                  {['Account Name', 'Code', 'Jan 2026', 'Feb 2026', 'Mar 2026', 'Q1 Total', 'Type', 'Status'].map((h) => (
-                    <th key={h} scope="col" className="excel-header-cell">{h}</th>
                   ))}
                 </tr>
               </thead>
               <tbody>
-                {SHEET_DATA.map((row, rIdx) => {
-                  const isCalc = row.type === 'Calc'
-                  const cells = [row.account, row.code, row.jan, row.feb, row.mar, row.q1, row.type, row.status]
-                  return (
-                    <tr
-                      key={rIdx}
-                      className={`excel-row ${isCalc ? 'excel-row--calc' : ''}`}
-                    >
-                      <td className="excel-row-number" aria-label={`Row ${rIdx + 2}`}>{rIdx + 2}</td>
-                      {cells.map((cell, cIdx) => {
+                {ROWS.map((rowNumber, rIdx) => (
+                    <tr key={rowNumber} className="excel-row">
+                      <td className="excel-row-number" aria-label={`Row ${rowNumber}`}>{rowNumber}</td>
+                      {COLUMNS.map((column, cIdx) => {
                         const isSelected = selectedCell?.row === rIdx && selectedCell?.col === cIdx
-                        const isNeg = typeof cell === 'string' && cell.startsWith('(')
-                        const isPos = ['Revenue', 'Income', 'Calc'].includes(row.type) && cIdx >= 2 && !isNeg && cell && cell !== ''
                         return (
                           <td
                             key={cIdx}
-                            className={`excel-cell ${isSelected ? 'excel-cell--selected' : ''} ${isNeg ? 'excel-cell--negative' : ''} ${isPos && cIdx >= 2 ? 'excel-cell--positive' : ''} ${isCalc ? 'excel-cell--calc' : ''} ${cIdx >= 2 && cIdx <= 5 ? 'excel-cell--num' : ''}`}
+                            className={`excel-cell ${isSelected ? 'excel-cell--selected' : ''}`}
                             onClick={() => setSelectedCell({ row: rIdx, col: cIdx })}
                             tabIndex={0}
                             onKeyDown={(e) => e.key === 'Enter' && setSelectedCell({ row: rIdx, col: cIdx })}
                             role="gridcell"
-                            aria-label={`${['Account Name', 'Code', 'Jan 2026', 'Feb 2026', 'Mar 2026', 'Q1 Total', 'Type', 'Status'][cIdx]}: ${cell}`}
-                          >
-                            {cIdx === 7 && cell === 'Active' ? (
-                              <span className="excel-status excel-status--active">Active</span>
-                            ) : cIdx === 6 ? (
-                              <span className={`excel-type excel-type--${row.type.toLowerCase()}`}>{cell}</span>
-                            ) : cell}
-                          </td>
+                            aria-label={`Cell ${column}${rowNumber}`}
+                          />
                         )
                       })}
                     </tr>
-                  )
-                })}
+                ))}
               </tbody>
             </table>
           </div>
@@ -340,26 +312,13 @@ function ExcelPage() {
         <div className="statusbar-left">
           <span className="statusbar-item" aria-label="Current sheet">{SHEETS[activeSheet]}</span>
           <span className="statusbar-sep" aria-hidden="true">|</span>
-          <span className="statusbar-item">{SHEET_DATA.length} rows</span>
+          <span className="statusbar-item">Ready</span>
           <span className="statusbar-sep" aria-hidden="true">|</span>
           <span className={`statusbar-sync ${syncing ? 'statusbar-sync--syncing' : 'statusbar-sync--ok'}`} aria-live="polite">
             {syncing ? '⟳ Syncing with FinAccrual…' : '✓ Synced'}
           </span>
         </div>
         <div className="statusbar-right" aria-label="Spreadsheet statistics">
-          {selectedCell && (() => {
-            const r = SHEET_DATA[selectedCell.row]
-            const vals = [r.jan, r.feb, r.mar, r.q1].map(v => parseFloat(v?.replace(/[^0-9.-]/g, '')) || 0)
-            const sum = vals.reduce((a, b) => a + b, 0)
-            return (
-              <>
-                <span className="statusbar-item">Average: {(sum / vals.filter(Boolean).length).toLocaleString('en-US', { maximumFractionDigits: 0 })}</span>
-                <span className="statusbar-sep" aria-hidden="true">|</span>
-                <span className="statusbar-item">Sum: {sum.toLocaleString()}</span>
-                <span className="statusbar-sep" aria-hidden="true">|</span>
-              </>
-            )
-          })()}
           <span className="statusbar-item" aria-label="Zoom level">100%</span>
         </div>
       </footer>

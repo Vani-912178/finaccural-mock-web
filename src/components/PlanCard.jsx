@@ -5,7 +5,7 @@ function PlanCard({ name, price, period = '/month', description, features, isMos
     <div className={`plan-card ${isMostPopular ? 'plan-card--popular' : ''}`} style={accentColor ? { '--card-accent': accentColor } : {}}>
       {isMostPopular && (
         <div className="plan-card__badge" aria-label="Most popular plan">
-          ⭐ Most Popular
+          Most Popular
         </div>
       )}
 
@@ -59,7 +59,7 @@ function PlanCard({ name, price, period = '/month', description, features, isMos
         id={`subscribe-${name.toLowerCase()}-btn`}
         aria-label={`Subscribe to ${name} plan at $${price} per month`}
       >
-        {isMostPopular ? '✦ Get Started' : 'Subscribe Now'}
+        Select Plan →
       </button>
     </div>
   )

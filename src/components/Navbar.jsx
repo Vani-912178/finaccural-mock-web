@@ -5,21 +5,7 @@ function Navbar({ transparent = false }) {
   const navigate = useNavigate()
   const location = useLocation()
 
-  const isLoggedIn = localStorage.getItem('fa_logged_in') === 'true'
-
-  const handleLogin = () => {
-    if (isLoggedIn) {
-      // navigate to credentials if paid, else home
-      const creds = localStorage.getItem('fa_credentials')
-      if (creds) {
-        navigate('/credentials')
-      } else {
-        navigate('/')
-      }
-    } else {
-      navigate('/login')
-    }
-  }
+  const handleLogin = () => navigate('/')
 
   const handleLogo = () => navigate('/')
 
@@ -38,26 +24,14 @@ function Navbar({ transparent = false }) {
             className="btn btn-outline btn-sm"
             onClick={handleLogin}
             id="nav-login-btn"
-            aria-label={isLoggedIn ? 'My Account' : 'Login'}
+            aria-label="Login"
           >
-            {isLoggedIn ? (
-              <>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                  <circle cx="12" cy="7" r="4"/>
-                </svg>
-                My Account
-              </>
-            ) : (
-              <>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
-                  <polyline points="10 17 15 12 10 7"/>
-                  <line x1="15" y1="12" x2="3" y2="12"/>
-                </svg>
-                Login
-              </>
-            )}
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+              <polyline points="10 17 15 12 10 7"/>
+              <line x1="15" y1="12" x2="3" y2="12"/>
+            </svg>
+            Login
           </button>
         </div>
       </div>

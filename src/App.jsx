@@ -5,6 +5,7 @@ import PaymentSuccessPage from './pages/PaymentSuccessPage'
 import CredentialsPage from './pages/CredentialsPage'
 import ExcelPage from './pages/ExcelPage'
 import LoginPage from './pages/LoginPage'
+import FreeTrialPage from './pages/FreeTrialPage'
 import './App.css'
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
       <Route path="/payment-success" element={<PaymentSuccessPage />} />
       <Route path="/credentials" element={<CredentialsPage />} />
       <Route path="/excel" element={<ExcelPage />} />
+      <Route path="/free-trial" element={<FreeTrialPage />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   )

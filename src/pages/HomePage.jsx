@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import PlanCard from '../components/PlanCard'
+import heroImage from '../assets/home.png'
 import './HomePage.css'
 
 const PLANS = [
@@ -70,17 +71,10 @@ function HomePage() {
       <section className="hero" aria-labelledby="hero-heading">
         <div className="container">
           <div className="hero__content">
-            <div className="hero__tag" aria-hidden="true">
-              <span className="hero__tag-dot" />
-              Trusted by 10,000+ businesses worldwide
-            </div>
-
             <h1 className="hero__heading" id="hero-heading">
-              Intelligent Financial
+              Finance operations,
               <br />
-              <span className="hero__heading-gradient">ERP & Accounting</span>
-              <br />
-              Built for Scale
+              <span className="hero__heading-gradient">made clear.</span>
             </h1>
 
             <p className="hero__subtext">
@@ -95,7 +89,7 @@ function HomePage() {
                 onClick={() => document.getElementById('pricing').scrollIntoView({ behavior: 'smooth' })}
                 id="hero-cta-btn"
               >
-                View Plans
+                Explore Plans
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                   <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
                 </svg>
@@ -108,6 +102,8 @@ function HomePage() {
                 Sign In
               </button>
             </div>
+
+            <p className="hero__note"><span>✓</span> 14-day free trial <i /> No credit card required <i /> Cancel anytime</p>
 
             {/* Stats */}
             <div className="hero__stats" role="list" aria-label="FinAccrual statistics">
@@ -123,6 +119,10 @@ function HomePage() {
                 </div>
               ))}
             </div>
+          </div>
+
+          <div className="hero__visual">
+            <img src={heroImage} alt="FinAccrual financial platform illustration" />
           </div>
 
           {/* Feature highlight cards */}
@@ -193,14 +193,9 @@ function HomePage() {
       <section className="pricing-section" id="pricing" aria-labelledby="pricing-heading">
         <div className="container">
           <div className="section-header">
-            <div className="section-tag">Simple Pricing</div>
             <h2 className="section-heading" id="pricing-heading">
               Choose Your Plan
             </h2>
-            <p className="section-subtext">
-              No hidden fees. No long-term contracts. Cancel anytime.
-              All plans include a 14-day free trial.
-            </p>
           </div>
 
           <div className="pricing-grid">
